@@ -1,10 +1,12 @@
-module sphereLayer(
+
+module semiSphereLayer(
   height,
-  diameter,
   thickness,
   topDiameter
   bottomDiameter
 ){
-  //main problem: calculating tangencies
-  // diameter can't be larger than top diameter or the bottom diameter
+  intersection(){
+  sphere(d=bottomDiameter, center=true)
+  cube([bottomDiameter, bottomDiameter, height], center=true)
+  }//errmn this is not working, not the code but rather the tangency
 }
