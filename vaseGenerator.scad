@@ -21,4 +21,27 @@ module semiSphereLayer(
 
   or = sqrt(pow(oy-h,2) + pow(b,2));
 
+
+  translate([0,0,oy])
+  sphere(r = 1);
+
+    translate([0,0,t+u])
+  sphere(r = 2);
+
+  translate([b,0,h])
+  color("red") 
+  sphere(r = 1);
+
+  translate([a,0,0])
+  sphere(r = 1);
+
+  translate([0,0,h/2])
+  sphere(r = 1);
+
+  translate([mx,0,my])
+  sphere(r = 1);
+
+translate([0,0,oy])
+  #sphere(r = or);
+
 }
