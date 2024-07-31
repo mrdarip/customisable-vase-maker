@@ -1,5 +1,5 @@
 $fn = 100;
-sphereLayer(10, 10, 50, 20);
+sphereLayer(10, 10, 25, 20);
 
 module sphereLayer(
     h,
@@ -21,4 +21,11 @@ module sphereLayer(
 
   sphereHeight = t + u;
   sphereRadius = sqrt(pow(t + u - h, 2) + pow(topD, 2));
+
+  intersection(){
+    translate([0, 0, h/2])
+      cube([10000, 100000, h], center = true);
+    translate([0, 0, sphereHeight])
+      sphere(r = sphereRadius);
+  }
 }
