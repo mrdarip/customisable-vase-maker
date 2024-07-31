@@ -1,12 +1,22 @@
 $fn = 100;
-
-// ovni
+/*
+// alien
 sphereLayer(10, 10, 30, 20);
 translate([0, 0, 10])
   sphereLayer(10, 10, 25, 30);
 translate([0, 0, 20])
   sphereLayer(30, 10, 0, 25); //dome
+*/
 
+
+layers = 10;
+height = 5;
+diameters = rands(10,20,layers+1);
+
+for (i=[0:layers-1]) {
+  translate([0, 0, i*height])
+  sphereLayer(height, 10, diameters[i+1], diameters[i]);
+}
 
 
 module sphereLayer(
