@@ -1,3 +1,4 @@
+$fn = 100;
 semiSphereLayer(10, 10, 30, 20);
 
 module semiSphereLayer(
@@ -6,33 +7,18 @@ module semiSphereLayer(
   topDiameter,
   bottomDiameter
 ) {
+//based on formulas 2.png
+  a = bottomDiameter;
+  b = topDiameter;
+  h=height;
+  mx = (b+a)/2;
+  my = h/2;
+  e = b-a; //check sign
+  beta = atan(h/e);
+  alpha = 180 - 90 - beta;
+  s = tan(a) * mx;
+  oy = s + h*2;
 
-  // calculating the intersection of the sphere center
+  or = sqrt(pow(oy-h,2) + pow(b,2));
 
-  //calculate the tangent of the two circles
-  // we need two points, the middle of the two circles and the normal vector of the two circles
-  //the middle point
-  middle = [(topDiameter - bottomDiameter) / 2, height / 2];
-  //the normal vector
-
-  m = (height - 0) / (topDiameter - bottomDiameter);
-  normal = [];
-
-  //y = mx + n
-  //m = (y2 - y1) / (x2 - x1)
-  //n = y1 - m * x1
-
-  //y = m * 0 + n as we are looking for the intersection with the z axis
-  //y = n = y1
-
-  o = (height / 2) + middle[0] + tan(90 - atan(height / (topDiameter / 2 - bottomDiameter / 2))) * middle[0];
-  echo(o);
-  intersection() {
-    spherer = sqrt(pow(bottomDiameter / 2, 2) + pow(o, 2));
-    translate([0, 0, o])
-    sphere(r = spherer, center = true);
-    translate([0, 0, height / 2])
-    #cube([1000, 10000, height], center = true);
-  }
-  cylinder(h = 1000, d = topDiameter);
 }
