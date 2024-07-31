@@ -1,5 +1,12 @@
 $fn = 100;
 sphereLayer(10, 10, 25, 20);
+translate([0, 0, 10])
+  sphereLayer(10, 10, 30, 25);
+translate([0, 0, 20])
+  sphereLayer(15, 10, 40, 30);
+translate([0, 0, 35])
+  sphereLayer(20, 10, 10, 40);
+
 
 module sphereLayer(
     h,
