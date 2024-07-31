@@ -1,7 +1,11 @@
 $fn = 100;
+
+// ovni
 sphereLayer(10, 10, 30, 20);
 translate([0, 0, 10])
-  sphereLayer(10, 10, 10, 30);
+  sphereLayer(10, 10, 25, 30);
+translate([0, 0, 20])
+  sphereLayer(30, 10, 0, 25); //dome
 
 
 
