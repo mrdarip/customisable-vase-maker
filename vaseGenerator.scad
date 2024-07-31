@@ -19,7 +19,12 @@ module semiSphereLayer(
   s = tan(a) * mx;
   oy = s + h*2;
 
-  or = sqrt(pow(oy-h,2) + pow(b,2));
+  t = tan(alpha) * a;
+  mm = sqrt(pow(e,2) + pow(h,2)) /2;
+  
+ u = mm/sin(beta) ;
+
+  or = sqrt(pow(t+u-h,2) + pow(b,2));
 
 
   translate([0,0,oy])
@@ -41,7 +46,7 @@ module semiSphereLayer(
   translate([mx,0,my])
   sphere(r = 1);
 
-translate([0,0,oy])
+translate([0,0,t+u])
   #sphere(r = or);
 
 }
