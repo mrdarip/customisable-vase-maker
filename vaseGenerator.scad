@@ -1,11 +1,8 @@
 $fn = 100;
-sphereLayer(10, 10, 25, 20);
+sphereLayer(10, 10, 30, 20);
 translate([0, 0, 10])
-  sphereLayer(10, 10, 30, 25);
-translate([0, 0, 20])
-  sphereLayer(15, 10, 40, 30);
-translate([0, 0, 35])
-  sphereLayer(20, 10, 10, 40);
+  sphereLayer(10, 10, 10, 30);
+
 
 
 module sphereLayer(
@@ -26,8 +23,11 @@ module sphereLayer(
 
   u = mm / sin(beta);
 
-  sphereHeight = t + u;
-  sphereRadius = sqrt(pow(t + u - h, 2) + pow(topD, 2));
+  extra = bottomD > topD ? -2*u : 0;
+
+  sphereHeight = t + u + extra;
+
+  sphereRadius = sqrt(pow(sphereHeight - h, 2) + pow(topD, 2));
 
   intersection(){
     translate([0, 0, h/2])
