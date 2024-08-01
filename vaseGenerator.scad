@@ -1,4 +1,4 @@
-$fn = 100;
+$fn = 50;
 /*
 // alien
 sphereLayer(10, 10, 30, 20);
@@ -9,13 +9,13 @@ translate([0, 0, 20])
 */
 
 
-layers = 3;
+layers = 1;
 height = 5;
 diameters = rands(10,20,layers+1);
 
 for (i=[0:layers-1]) {
   translate([0, 0, i*height])
-  sphereLayer(height, 1, diameters[i+1], diameters[i]);
+  sphereLayer(height, 1, diameters[i+1], diameters[i], true, false, true);
 }
 
 
@@ -23,7 +23,10 @@ module sphereLayer(
     h,
     thickness,
     topD,
-    bottomD
+    bottomD,
+    hasBottom = true,
+    hasTop = true,
+    isHollow = true
 ){
   // based on formulas 2.png
   mx = (topD + bottomD) / 2; // midpoint x
@@ -46,10 +49,26 @@ module sphereLayer(
   intersection(){
     translate([0, 0, h/2])
       cube([10000, 100000, h], center = true);
-    translate([0, 0, sphereHeight])
+    translate([0, 0, sphereHeight]){
     difference() {
       sphere(r = sphereRadius);
-      sphere(r = sphereRadius - thickness);
+      if(isHollow){
+        difference() {
+          sphere(r = sphereRadius - thickness);
+        
+          if(hasBottom){
+            
+            translate([-bottomD*2, -bottomD*2, 0])
+            cube([10000, 10000, thickness]);
+          }
+          if(hasBottom){
+            halfTop = topD / 2;
+            translate([-topD*2, -topD*2, h-thickness])
+            cube([10000, 10000, thickness]);
+          }
+        }
+      }
     }
+}
   }
 }
