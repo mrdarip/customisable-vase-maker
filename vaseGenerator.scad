@@ -9,13 +9,21 @@ translate([0, 0, 20])
 */
 
 
-layers = 1;
+layers = 3;
 height = 5;
 diameters = rands(10,20,layers+1);
 
 for (i=[0:layers-1]) {
   translate([0, 0, i*height])
-  sphereLayer(height, 1, diameters[i+1], diameters[i], true, false, true);
+  sphereLayer(
+    h = height, 
+    thickness = 1, 
+    topD = diameters[i+1], 
+    bottomD = diameters[i], 
+    hasBottom = i == 0,
+    hasTop = i == layers-1,
+    isHollow = true
+  );
 }
 
 
@@ -50,25 +58,25 @@ module sphereLayer(
     translate([0, 0, h/2])
       cube([10000, 100000, h], center = true);
     translate([0, 0, sphereHeight]){
-    difference() {
-      sphere(r = sphereRadius);
-      if(isHollow){
-        difference() {
-          sphere(r = sphereRadius - thickness);
+      difference() {
+        sphere(r = sphereRadius);
         
-          if(hasBottom){
-            
-            translate([-bottomD*2, -bottomD*2, 0])
-            cube([10000, 10000, thickness]);
-          }
-          if(hasBottom){
-            halfTop = topD / 2;
-            translate([-topD*2, -topD*2, h-thickness])
-            cube([10000, 10000, thickness]);
+        if(isHollow){
+          difference() {
+            sphere(r = sphereRadius - thickness);
+          
+            if(hasBottom){
+              echo("hi");
+              translate([-bottomD*2, -bottomD*2, -sphereHeight])
+              cube([10000, 10000, thickness]);
+            }
+            if(hasTop){
+              translate([-topD*2, -topD*2, h-thickness-sphereHeight])
+              cube([10000, 10000, thickness]);
+            }
           }
         }
       }
     }
-}
   }
 }
