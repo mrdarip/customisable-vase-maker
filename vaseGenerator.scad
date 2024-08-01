@@ -9,13 +9,13 @@ translate([0, 0, 20])
 */
 
 
-layers = 10;
+layers = 3;
 height = 5;
 diameters = rands(10,20,layers+1);
 
 for (i=[0:layers-1]) {
   translate([0, 0, i*height])
-  sphereLayer(height, 10, diameters[i+1], diameters[i]);
+  sphereLayer(height, 1, diameters[i+1], diameters[i]);
 }
 
 
@@ -47,6 +47,9 @@ module sphereLayer(
     translate([0, 0, h/2])
       cube([10000, 100000, h], center = true);
     translate([0, 0, sphereHeight])
+    difference() {
       sphere(r = sphereRadius);
+      sphere(r = sphereRadius - thickness);
+    }
   }
 }
