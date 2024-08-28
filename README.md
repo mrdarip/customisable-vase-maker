@@ -4,3 +4,5 @@
 
 get a sample stl here: 
 <https://github.com/mrdarip/customisable-vase-maker/blob/main/output.stl>
+
+[thingverse](https://www.thingiverse.com/thing:6746262)
